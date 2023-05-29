@@ -21,8 +21,8 @@ def as_bytes(x):
 
 
 
-DEBUG = True
-VERBOSE = True
+DEBUG = False
+VERBOSE = False
 OP_COUNT = False
 
 load('squareroottab.sage')
@@ -415,7 +415,6 @@ def expand_message_xmd(H, msg, DST, len_in_bytes):
     assert isinstance(msg, bytes)
 
     (hasher, b_in_bytes, r_in_bytes) = H
-    print("r_in_bytes")
     assert len(DST) <= 255
     ell = (len_in_bytes + b_in_bytes - 1)//b_in_bytes
     assert ell <= 255
@@ -433,7 +432,6 @@ def _expand_message_xmd(H, msg, DST, len_in_bytes):
     assert isinstance(msg, bytes)
 
     (hasher, b_in_bytes, r_in_bytes) = H
-    print("r_in_bytes")
     assert len(DST) <= 255
     ell = (len_in_bytes + b_in_bytes - 1)//b_in_bytes
     assert ell <= 255
@@ -456,7 +454,6 @@ def hash_to_pallas_jacobian(msg, DST):
     c = Cost()
     us = hash_to_field(p, msg, DST, 2)
     if VERBOSE: print("us = [0x%064x, 0x064%x]" % (us[0], us[1]))
-    print("us = [0x%064x, 0x064%x]" % (us[0], us[1]))
     Q0 = map_to_curve_simple_swu(F_p, IsoEp, IsoEpZ, us[0], c)
     Q1 = map_to_curve_simple_swu(F_p, IsoEp, IsoEpZ, us[1], c)
 
@@ -473,7 +470,7 @@ def hash_to_vesta_jacobian(msg, DST):
     us = hash_to_field(q, msg, DST, 2)
     if VERBOSE: 
         print("VERBOSE----------------->")
-    print("us = [0x%064x, 0x064%x]" % (us[0], us[1]))
+    # print("us = [0x%064x, 0x064%x]" % (us[0], us[1]))
     Q0 = map_to_curve_simple_swu(F_q, IsoEq, IsoEqZ, us[0], c)
     Q1 = map_to_curve_simple_swu(F_q, IsoEq, IsoEqZ, us[1], c)
 

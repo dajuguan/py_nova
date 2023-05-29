@@ -26,8 +26,8 @@ def as_bytes(x):
 
 
 
-DEBUG = True
-VERBOSE = True
+DEBUG = False
+VERBOSE = False
 OP_COUNT = False
 
 load('squareroottab.sage')
@@ -420,7 +420,6 @@ def expand_message_xmd(H, msg, DST, len_in_bytes):
     assert isinstance(msg, bytes)
 
     (hasher, b_in_bytes, r_in_bytes) = H
-    print("r_in_bytes")
     assert len(DST) <= _sage_const_255 
     ell = (len_in_bytes + b_in_bytes - _sage_const_1 )//b_in_bytes
     assert ell <= _sage_const_255 
@@ -438,7 +437,6 @@ def _expand_message_xmd(H, msg, DST, len_in_bytes):
     assert isinstance(msg, bytes)
 
     (hasher, b_in_bytes, r_in_bytes) = H
-    print("r_in_bytes")
     assert len(DST) <= _sage_const_255 
     ell = (len_in_bytes + b_in_bytes - _sage_const_1 )//b_in_bytes
     assert ell <= _sage_const_255 
@@ -461,7 +459,6 @@ def hash_to_pallas_jacobian(msg, DST):
     c = Cost()
     us = hash_to_field(p, msg, DST, _sage_const_2 )
     if VERBOSE: print("us = [0x%064x, 0x064%x]" % (us[_sage_const_0 ], us[_sage_const_1 ]))
-    print("us = [0x%064x, 0x064%x]" % (us[_sage_const_0 ], us[_sage_const_1 ]))
     Q0 = map_to_curve_simple_swu(F_p, IsoEp, IsoEpZ, us[_sage_const_0 ], c)
     Q1 = map_to_curve_simple_swu(F_p, IsoEp, IsoEpZ, us[_sage_const_1 ], c)
 
@@ -478,7 +475,7 @@ def hash_to_vesta_jacobian(msg, DST):
     us = hash_to_field(q, msg, DST, _sage_const_2 )
     if VERBOSE: 
         print("VERBOSE----------------->")
-    print("us = [0x%064x, 0x064%x]" % (us[_sage_const_0 ], us[_sage_const_1 ]))
+    # print("us = [0x%064x, 0x064%x]" % (us[0], us[1]))
     Q0 = map_to_curve_simple_swu(F_q, IsoEq, IsoEqZ, us[_sage_const_0 ], c)
     Q1 = map_to_curve_simple_swu(F_q, IsoEq, IsoEqZ, us[_sage_const_1 ], c)
 
@@ -491,9 +488,9 @@ def hash_to_vesta_jacobian(msg, DST):
     return (P, (Px, Py, Pz), c)
 
 
-print("")
-print(">>>>>>>>>>>>>>>>>>",F_p)
-print(">>>>>>>>>>>>>>>>>>",F_q.g)
+# print("")
+# print(">>>>>>>>>>>>>>>>>>",F_p)
+# print(">>>>>>>>>>>>>>>>>>",F_q.g)
 
 # P0 = map_to_curve_simple_swu(F_p, IsoEp, IsoEpZ, Mod(0, p), Cost())
 # print("Fp: map_to_curve_simple_swu(0) = %r" % (P0.to_affine(IsoEp),))

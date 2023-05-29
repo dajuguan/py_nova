@@ -8,7 +8,7 @@ import sys
 if sys.version_info[0] == 2:
     range = xrange
 
-DEBUG = True
+DEBUG = False
 VERBOSE = False
 EXPENSIVE = False
 
@@ -259,19 +259,19 @@ q = 0x40000000000000000000000000000000224698fc0994a8dd8c46eb2100000001
 F_p = SqrtField(p, 5, Cost(223, 23), hash_xor=0x11BE,   hash_mod=1098)
 F_q = SqrtField(q, 5, Cost(223, 24), hash_xor=0x116A9E, hash_mod=1206)
 
-print("p = %r" % (p,))
+# print("p = %r" % (p,))
 
 x = Mod(0x1234567890123456789012345678901234567890123456789012345678901234, p)
-print(F_p.sarkar_sqrt(x, Cost()))
+# print(F_p.sarkar_sqrt(x, Cost()))
 Dx = Mod(0x123456, p)
-print(F_p.sarkar_divsqrt(x*Dx, Dx, Cost()))
+# print(F_p.sarkar_divsqrt(x*Dx, Dx, Cost()))
 
 x = Mod(0x2345678901234567890123456789012345678901234567890123456789012345, p)
-print(F_p.sarkar_sqrt(x, Cost()))
+# print(F_p.sarkar_sqrt(x, Cost()))
 
 # nonsquare
 x = Mod(0x3456789012345678901234567890123456789012345678901234567890123456, p)
-print(F_p.sarkar_sqrt(x, Cost()))
+# print(F_p.sarkar_sqrt(x, Cost()))
 
 if SUBGROUP_TEST:
     for i in range(33):
